@@ -1,7 +1,7 @@
 {
   "name": "верно",
   "short_name": "верно",
-  "description": "An AI-powered digital homework assistant to help you find solutions and understand complex problems, powered by Google Gemini.",
+  "description": "Новый сервис для предоставления ученикам цифрового электронного задания (ЦДЗ).",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#f1f5f9",

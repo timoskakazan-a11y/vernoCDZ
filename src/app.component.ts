@@ -1,6 +1,4 @@
-import { Component, ChangeDetectionStrategy, signal, AfterViewInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { GoogleGenAI } from '@google/genai';
+import { Component, ChangeDetectionStrategy, AfterViewInit } from '@angular/core';
 
 declare var lottie: any;
 
@@ -9,26 +7,9 @@ const lottieIconData = {"v":"5.12.1","fr":60,"ip":0,"op":120,"w":144,"h":144,"nm
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule]
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements AfterViewInit {
-  prompt = signal('');
-  isLoading = signal(false);
-  solution = signal('');
-  error = signal('');
-  
-  private ai: GoogleGenAI | null = null;
-
-  constructor() {
-    if (typeof process !== 'undefined' && process.env && process.env.API_KEY) {
-      this.ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-    } else {
-        console.error("API_KEY environment variable not found.");
-        this.error.set("Ключ API не найден. Пожалуйста, убедитесь, что он настроен правильно.");
-    }
-  }
-
   ngAfterViewInit() {
     if (typeof lottie !== 'undefined') {
       const iconContainer = document.getElementById('lottie-key-icon');
@@ -41,43 +22,6 @@ export class AppComponent implements AfterViewInit {
           animationData: lottieIconData,
         });
       }
-    }
-  }
-
-  handlePromptInput(event: Event): void {
-    const inputElement = event.target as HTMLTextAreaElement;
-    this.prompt.set(inputElement.value);
-  }
-
-  async getSolution(): Promise<void> {
-    if (!this.prompt().trim() || !this.ai) {
-      if (!this.ai) {
-         this.error.set("Сервис Gemini не инициализирован. Проверьте ключ API.");
-      }
-      return;
-    }
-
-    this.isLoading.set(true);
-    this.solution.set('');
-    this.error.set('');
-
-    try {
-      const response = await this.ai.models.generateContent({
-        model: 'gemini-2.5-flash',
-        contents: this.prompt(),
-        config: {
-            systemInstruction: "You are 'верно', a friendly and helpful AI study assistant for Russian-speaking students. Provide clear, concise, and easy-to-understand explanations and solutions to their homework problems. Format your answers clearly using paragraphs, lists, and bold text where appropriate. Always answer in Russian.",
-        }
-      });
-      
-      const text = response.text;
-      this.solution.set(text);
-
-    } catch (e) {
-      console.error(e);
-      this.error.set('Произошла ошибка при получении решения. Пожалуйста, попробуйте еще раз.');
-    } finally {
-      this.isLoading.set(false);
     }
   }
 }
