@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>верно — ваш ИИ-помощник по учебе</title>
+  
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="/manifest.json">
+  
+  <!-- Theme Color for browser chrome -->
+  <meta name="theme-color" content="#114EA2">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://i.postimg.cc/1z4fYDnc/verno.png">
+  <link rel="apple-touch-icon" href="https://i.postimg.cc/1z4fYDnc/verno.png">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+  <style>
+    body, .prose { 
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    }
+    .fade-in {
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-gradient {
+        background-size: 200% 200%;
+        animation: gradient-animation 2s ease infinite;
+    }
+    @keyframes gradient-animation {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+  </style>
+<script type="importmap">
+{
+  "imports": {
+    "rxjs": "https://esm.sh/rxjs@7.8.1",
+    "rxjs/operators": "https://esm.sh/rxjs@7.8.1/operators",
+    "rxjs/ajax": "https://esm.sh/rxjs@7.8.1/ajax",
+    "rxjs/webSocket": "https://esm.sh/rxjs@7.8.1/webSocket",
+    "rxjs/testing": "https://esm.sh/rxjs@7.8.1/testing",
+    "rxjs/fetch": "https://esm.sh/rxjs@7.8.1/fetch",
+    "@angular/platform-browser": "https://esm.sh/@angular/platform-browser@20.3.0?external=rxjs",
+    "@angular/compiler": "https://esm.sh/@angular/compiler@20.3.0?external=rxjs",
+    "@google/genai": "https://esm.sh/@google/genai@1.30.0",
+    "@angular/common": "https://esm.sh/@angular/common@20.3.0?external=rxjs",
+    "@angular/core": "https://esm.sh/@angular/core@20.3.0?external=rxjs"
+  }
+}
+</script>
+</head>
+<body class="bg-gray-100 text-slate-800">
+  <app-root></app-root>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(registration => {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          })
+          .catch(error => {
+            console.log('ServiceWorker registration failed: ', error);
+          });
+      });
+    }
+  </script>
+  <script type="module" src="index.tsx"></script>
+</body>
+</html>

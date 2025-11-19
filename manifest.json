@@ -1,0 +1,21 @@
+{
+  "name": "верно",
+  "short_name": "верно",
+  "description": "An AI-powered digital homework assistant to help you find solutions and understand complex problems, powered by Google Gemini.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f1f5f9",
+  "theme_color": "#114EA2",
+  "icons": [
+    {
+      "src": "https://i.postimg.cc/1z4fYDnc/verno.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://i.postimg.cc/1z4fYDnc/verno.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
